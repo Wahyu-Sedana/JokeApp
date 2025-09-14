@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nge_joke_app/feature/jokes/states/theme_state.dart';
+import 'package:nge_joke_app/feature/jokes/screens/splash_screen.dart';
 
 import 'feature/jokes/screens/home_screen.dart';
 
@@ -17,63 +17,89 @@ void main() {
   );
 }
 
-class App extends ConsumerWidget {
+class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mode = ref.watch(themeModeProvider);
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Generate JokeAPI.dev',
+      title: 'Joke Collection',
       theme: ThemeData(
-        brightness: Brightness.light,
-        iconTheme: const IconThemeData(color: Colors.black),
-        textTheme: const TextTheme(
-          displaySmall: TextStyle(
-            letterSpacing: -5,
-            color: Colors.white,
-          ),
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromRGBO(78, 11, 62, 1),
+          brightness: Brightness.dark,
         ),
+        scaffoldBackgroundColor: const Color(0xFF0D0D0F),
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromRGBO(78, 11, 62, 1),
+          foregroundColor: Colors.white,
           centerTitle: true,
           toolbarHeight: 75,
-        ),
-        listTileTheme: const ListTileThemeData(
-          shape: Border(
-            bottom: BorderSide(color: Colors.grey),
+          elevation: 8,
+          shadowColor: Colors.black54,
+          titleTextStyle: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
+            letterSpacing: -0.5,
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.white,
+            size: 24,
           ),
         ),
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        iconTheme: const IconThemeData(color: Colors.white),
         textTheme: const TextTheme(
           displaySmall: TextStyle(
-            letterSpacing: -5,
+            letterSpacing: -1,
+            fontWeight: FontWeight.w600,
             color: Colors.white,
           ),
-          bodyLarge: TextStyle(
-            fontSize: 20,
+          headlineSmall: TextStyle(
+            fontWeight: FontWeight.w600,
+            letterSpacing: -0.5,
             color: Colors.white,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 14,
+            height: 1.4,
+            color: Colors.white70,
           ),
         ),
-        appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          toolbarHeight: 75,
+        cardTheme: CardTheme(
+          elevation: 4,
+          shadowColor: Colors.black54,
+          color: const Color(0xFF1A1A1E),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
         ),
         listTileTheme: const ListTileThemeData(
-          style: ListTileStyle.drawer,
-          shape: Border(
-            bottom: BorderSide(
-              color: Colors.grey,
+          textColor: Colors.white70,
+          iconColor: Colors.white70,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromRGBO(78, 11, 62, 1),
+            foregroundColor: Colors.white,
+            elevation: 8,
+            shadowColor: Colors.black54,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
         ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color.fromRGBO(78, 11, 62, 1),
+          foregroundColor: Colors.white,
+          elevation: 12,
+        ),
       ),
-      themeMode: mode,
-      home: const HomePage(),
+      home: AppWithSplash(
+        homeScreen: const HomePage(),
+      ),
     );
   }
 }

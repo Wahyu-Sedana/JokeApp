@@ -21,7 +21,7 @@ class JokeRepository {
 
   Future<JokesModel> getJokes(String filter) async {
     try {
-      final result = await _api.dio.get("$filter&amount=10");
+      final result = await _api.dio.get("$filter&amount=20");
       return JokesModel.fromJson(result.data);
     } on DioError catch (error) {
       throw CustomError(
