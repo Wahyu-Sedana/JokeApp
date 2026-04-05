@@ -16,7 +16,7 @@ class CustomInterceptors extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     log('ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     super.onError(err, handler);
   }

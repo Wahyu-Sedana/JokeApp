@@ -11,7 +11,7 @@ class JokeRepository {
     try {
       final result = await _api.dio.get(filter);
       return JokeModel.fromJson(result.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw CustomError(
         code: error.response?.statusCode ?? 500,
         message: error.response?.data ?? "server Error",
@@ -23,7 +23,7 @@ class JokeRepository {
     try {
       final result = await _api.dio.get("$filter&amount=20");
       return JokesModel.fromJson(result.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw CustomError(
         code: error.response?.statusCode ?? 500,
         message: error.response?.data ?? "server Error",
